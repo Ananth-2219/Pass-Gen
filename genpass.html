@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="rpcss.css">
+</head>
+<body>
+    <div class="cont">
+        <div class="card">
+        <h1> Generate a <br><span class="rp">Random Password</span>
+        </div>   
+        <br><br><span class="inp">Length:<input class="length" id="len">Alphabets:<input class="box" type="checkbox" id="char">Numbers:<input class="box" type="checkbox" id="num"> Spl Chars:<input class="box" type="checkbox" id="spl"></span>
+    </h1>
+        <div class="display">
+            <input type="text" id="pass" placeholder="Password">
+            <img onclick="copypassword()" src="copy.png">
+        </div>
+        <button onclick="createpassword()" class="button"><img src="strike4.png">Generate Password</button>
+
+    </div>
+
+    <script>
+        const passbox=document.getElementById("pass");
+        
+
+        const uppercase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowercase="abcdefghijklmnopqrstuvwxyz";
+        const num="0123456789";
+        const symbol="~!@#$%^&*()_+{}|:<>?,./;'[]\-=";
+        const allchar=uppercase+lowercase+num+symbol;
+
+        function createpassword(){
+            let l=document.getElementById("len").value;
+            let p="";
+            let a=document.getElementById("char");
+            let b=document.getElementById("num");
+            let c=document.getElementById("spl");
+            
+            if(!a.checked && !b.checked && !c.checked){
+                alert("Select at least one option");
+                return;
+            }
+            
+            while(l>p.length){
+                if(a.checked){
+                    p+=uppercase[Math.floor(Math.random()*uppercase.length)];
+                    p+=lowercase[Math.floor(Math.random()*lowercase.length)];
+                }
+                if(b.checked){
+                    p+=num[Math.floor(Math.random()*num.length)];
+                }
+                if(c.checked){
+                    p+=symbol[Math.floor(Math.random()*symbol.length)]
+                }
+            }
+            passbox.value=p;
+        }
+
+        function copypassword(){
+            passbox.select();
+            document.execCommand("copy");
+
+        }
+    </script>
+
+    
+</body>
+</html>
